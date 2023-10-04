@@ -2,26 +2,32 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const LeftSideNav = () => {
-    const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-    useEffect(() => {
-        fetch('categories.json')
-            .then(res => res.json())
-            .then(data => setCategories(data))
-    }, [])
+  useEffect(() => {
+    fetch("categories.json")
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
+  }, []);
 
-    return (
+  return (
+    <div className="sticky top-2">
+      <div className="h-[100vh] overflow-y-scroll">
         <div className="space-y-6">
-            <h2 className="text-2xl">All Categories</h2>
-            {
-                categories.map(category => <Link 
-                    className="block ml-4 text-xl font-semibold" 
-                    key={category.id}
-                    to={`/category/${category.id}`}
-                    >{category.name}</Link>)
-            }
+          <h2 className="text-2xl">All Categories</h2>
+          {categories.map((category) => (
+            <Link
+              className="block ml-4 text-xl font-semibold"
+              key={category.id}
+              to={`/category/${category.id}`}
+            >
+              {category.name}
+            </Link>
+          ))}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default LeftSideNav;
